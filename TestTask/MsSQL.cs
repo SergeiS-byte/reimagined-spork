@@ -6,6 +6,8 @@ using System.IO;
 using Microsoft.SqlServer.Management.Smo;
 using Newtonsoft.Json;
 using System.Net.Mail;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace TestTask
 {
@@ -16,10 +18,10 @@ namespace TestTask
         public string Version;
     }
 
-    class MsSQL
+    class MsSQL : IAvailable
     {      
         //проверка доступности SQL Server
-        public static void SQLConnection()
+        public void CheckAvailability()
         {
             SQLServerData serverData = new SQLServerData();
             serverData.date = new DateTime();
@@ -28,8 +30,9 @@ namespace TestTask
             {
                 try
                 {                   
-                    Console.WriteLine("\nВведите имя SQL сервера, к которому хотите подключиться, например DESKTOP-CODCI6J");
-                    string ServerName = Convert.ToString(Console.ReadLine());
+                    
+                    string ServerName = ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
+                    Console.WriteLine("\nИмя SQL сервера, к которому вы подключаетесь {0}", ServerName);
 
                     if (ServerName != null)
                     {
@@ -70,7 +73,7 @@ namespace TestTask
             }
         }
 
-        public static void DessirializeSQLData(string data)
+        public static void DessirializeData(string data)
         {
             SQLServerData SQLData = JsonConvert.DeserializeObject<SQLServerData>(data);
             Console.WriteLine("date " + SQLData.date + " Server " + SQLData.Server + " Version " + SQLData.Version);

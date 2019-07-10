@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Configuration;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
@@ -14,19 +16,26 @@ namespace TestTask
         public string Status;
     }
 
-    class Sites
+    class Sites : IAvailable
     {
-        public static void PingAddress()
+        public void CheckAvailability()
         {
             SiteData data = new SiteData();
             data.date = new DateTime();
 
             Ping ping = new Ping();
-            Console.WriteLine("\nВведите адрес сайта для пинга, например www.ya.ru");
+            //Console.WriteLine("\nВведите адрес сайта для пинга, например www.ya.ru");
+            Console.WriteLine("\nсайта для пинга:");
+
+            //ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
+            //configMap.ExeConfigFilename = @"App1.config";
+            //Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
             while (true)
             {
-                string siteName = Convert.ToString(Console.ReadLine());
+                string siteName = ConfigurationManager.AppSettings["siteName"];//Convert.ToString(Console.ReadLine());
+                Console.WriteLine(siteName);
+                //siteName = ConfigurationManager.AppSettings
                 try
                 {
                     PingReply pingReply = ping.Send(siteName);
@@ -51,12 +60,12 @@ namespace TestTask
                 {
                     //Недоступно - www.euroset.ru
                     //Доступно - www.yandex.ru
-                    Console.WriteLine("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта");
+                    Console.WriteLine("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта" + ex);
                 }                
             }
         }
 
-        public static void DessirializeSiteData(string data)
+        public static void DessirializeData(string data)
         {
             SiteData siteData = JsonConvert.DeserializeObject<SiteData>(data);
             Console.WriteLine("date " + siteData.date + " Address " + siteData.Address + " Status " + siteData.Status);
