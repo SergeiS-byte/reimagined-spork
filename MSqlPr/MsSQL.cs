@@ -8,9 +8,18 @@ using Newtonsoft.Json;
 using System.Net.Mail;
 using System.Configuration;
 using System.Collections.Specialized;
+using InterfacePr;
 
-namespace TestTask
+namespace MSqlPr
 {
+    public class MSQLCreator : CheckAvailability
+    {
+        public override IAvailable Check_Object()
+        {
+            return new MsSQL();
+        }
+    }
+
     class SQLServerData
     {
         public DateTime date;
@@ -18,7 +27,7 @@ namespace TestTask
         public string Version;
     }
 
-    class MsSQL : IAvailable
+    public class MsSQL : IAvailable
     {      
         //проверка доступности SQL Server
         public void CheckAvailability()

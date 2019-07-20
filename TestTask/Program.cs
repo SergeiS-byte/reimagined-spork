@@ -3,6 +3,9 @@ using System.Collections.Specialized;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using InterfacePr;
+using SitePr;
+using MSqlPr;
 
 namespace TestTask
 {
@@ -12,9 +15,6 @@ namespace TestTask
         {
             try
             {
-                //ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
-                //configMap.ExeConfigFilename = @"App1.config";
-                //Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
                 if (args.Length == 0)
                 {                    
@@ -59,43 +59,43 @@ namespace TestTask
     }
 
     //
-    abstract class CheckAvailability
-    {
-        public abstract IAvailable Check_Object();
+    //abstract class CheckAvailability
+    //{
+    //    public abstract IAvailable Check_Object();
 
-        public void CheckOperation()
-        {
-            var check = Check_Object();
-            check.CheckAvailability();
-        }
-    }
+    //    public void CheckOperation()
+    //    {
+    //        var check = Check_Object();
+    //        check.CheckAvailability();
+    //    }
+    //}
 
-    class SiteCeator : CheckAvailability
-    {
-        public override IAvailable Check_Object()
-        {
-            return new Sites();
-        }
-    }
+    //class SiteCeator : CheckAvailability
+    //{
+    //    public override IAvailable Check_Object()
+    //    {
+    //        return new Sites();
+    //    }
+    //}
 
-    class MSQLCreator : CheckAvailability
-    {
-        public override IAvailable Check_Object()
-        {
-            return new MsSQL();
-        }
-    }
+    //class MSQLCreator : CheckAvailability
+    //{
+    //    public override IAvailable Check_Object()
+    //    {
+    //        return new MsSQL();
+    //    }
+    //}
 
-    public interface IAvailable
-    {
-        void CheckAvailability();
-    }
+    //public interface IAvailable
+    //{
+    //    void CheckAvailability();
+    //}
 
-    class Summon
-    {
-        public void call(CheckAvailability check)
-        {
-            check.CheckOperation();
-        }
-    }
+    //class Summon
+    //{
+    //    public void call(CheckAvailability check)
+    //    {
+    //        check.CheckOperation();
+    //    }
+    //}
 }

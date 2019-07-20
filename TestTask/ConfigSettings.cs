@@ -62,8 +62,10 @@ namespace TestTask
             {
                 Console.WriteLine("Введите параметр key, который хотите изменить или введите новый, если хотите его создать");
                 string key = Convert.ToString(Console.ReadLine());
+
                 Console.WriteLine("Введите параметр value");
                 string value = Convert.ToString(Console.ReadLine());
+
                 AddUpdateAppSettings(key, value);
 
                 Console.WriteLine("Хотите изменить еще один параметр?\nВведите: 1 - да, 2 - нет");

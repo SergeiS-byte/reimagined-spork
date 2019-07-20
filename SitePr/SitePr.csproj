@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A7EC22A6-9E76-43FC-802C-52A8CFF844F5}</ProjectGuid>
+    <ProjectGuid>{A02B1E23-9930-4086-A7F7-463BC62AC1C5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestTask</RootNamespace>
-    <AssemblyName>TestTask</AssemblyName>
+    <RootNamespace>SitePr</RootNamespace>
+    <AssemblyName>SitePr</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,25 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Data.Tools.Sql.BatchParser, Version=15.1.18097.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Tools.Sql.BatchParser.150.18097.0-xplat\lib\netstandard2.0\Microsoft.Data.Tools.Sql.BatchParser.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Scripting.11.0.2100.61\lib\Microsoft.SqlServer.Management.Sdk.Sfc.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Scripting.11.0.2100.61\lib\Microsoft.SqlServer.Smo.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlClient, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.4.0\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,33 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SendigToEmail.cs" />
+    <Compile Include="Sites.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="App1.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InterfacePr\InterfacePr.csproj">
       <Project>{ccef0dbc-e141-4cf9-8e32-4793772d15ff}</Project>
       <Name>InterfacePr</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MSqlPr\MSqlPr.csproj">
-      <Project>{8f903759-216e-4caa-88dd-19acc9b94b64}</Project>
-      <Name>MSqlPr</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SitePr\SitePr.csproj">
-      <Project>{a02b1e23-9930-4086-a7f7-463bc62ac1c5}</Project>
-      <Name>SitePr</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

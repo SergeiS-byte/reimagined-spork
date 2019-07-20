@@ -5,9 +5,18 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net.NetworkInformation;
+using InterfacePr;
 
-namespace TestTask
+namespace SitePr
 {
+
+    public class SiteCeator : CheckAvailability
+    {
+        public override IAvailable Check_Object()
+        {
+            return new Sites();
+        }
+    }
     //проверка доступности сайта
     class SiteData
     {
@@ -16,7 +25,7 @@ namespace TestTask
         public string Status;
     }
 
-    class Sites : IAvailable
+    public class Sites : IAvailable
     {
         public void CheckAvailability()
         {
