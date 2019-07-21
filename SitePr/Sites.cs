@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Net.NetworkInformation;
 using InterfacePr;
+using UserStructure;
 
 namespace SitePr
 {
@@ -17,6 +18,7 @@ namespace SitePr
             return new Sites();
         }
     }
+
     //проверка доступности сайта
     class SiteData
     {
@@ -33,21 +35,17 @@ namespace SitePr
             data.date = new DateTime();
 
             Ping ping = new Ping();
-            //Console.WriteLine("\nВведите адрес сайта для пинга, например www.ya.ru");
             Console.WriteLine("\nсайта для пинга:");
-
-            //ExeConfigurationFileMap configMap = new ExeConfigurationFileMap();
-            //configMap.ExeConfigFilename = @"App1.config";
-            //Configuration config = ConfigurationManager.OpenMappedExeConfiguration(configMap, ConfigurationUserLevel.None);
 
             while (true)
             {
-                string siteName = ConfigurationManager.AppSettings["siteName"];//Convert.ToString(Console.ReadLine());
-                Console.WriteLine(siteName);
-                //siteName = ConfigurationManager.AppSettings
+                StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+
+                //string siteName = ConfigurationManager.AppSettings["siteName"];//Convert.ToString(Console.ReadLine());
+                Console.WriteLine("section"+section.FolderItems[0].Path);
                 try
                 {
-                    PingReply pingReply = ping.Send(siteName);
+                    PingReply pingReply = ping.Send((section.FolderItems[0].Path));
 
                     if (pingReply.Address != null)
                     {
@@ -70,7 +68,7 @@ namespace SitePr
                     //Недоступно - www.euroset.ru
                     //Доступно - www.yandex.ru
                     Console.WriteLine("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта" + ex);
-                }                
+                }
             }
         }
 

@@ -60,6 +60,10 @@
       <Project>{ccef0dbc-e141-4cf9-8e32-4793772d15ff}</Project>
       <Name>InterfacePr</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserStructure\UserStructure.csproj">
+      <Project>{b6b1a6ad-fa6d-4b05-8249-9b8e849fd5dc}</Project>
+      <Name>UserStructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

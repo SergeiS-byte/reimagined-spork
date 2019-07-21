@@ -6,6 +6,8 @@ using System.IO;
 using InterfacePr;
 using SitePr;
 using MSqlPr;
+using Unity;
+using Microsoft.Practices.Unity.Configuration;
 
 namespace TestTask
 {
@@ -15,20 +17,19 @@ namespace TestTask
         {
             try
             {
-
                 if (args.Length == 0)
                 {                    
                     Console.WriteLine("Приложение было запущено без параметра");
-
-                    Console.WriteLine("Параметры файла конфигурации");
+                    SetSettings.Settings();
+                    //Console.WriteLine("Параметры файла конфигурации");
                     ConfigSettings.ReadAllSettings();
-                    Console.WriteLine();
+                    //Console.WriteLine();
 
                     Console.WriteLine("Вы хотите изменить параметры запуска?\nВведите: 1-да, 2-нет");
                     string param = Convert.ToString(Console.ReadLine());
                     if (param == "1")
                     {
-                        ConfigSettings.ChangeSettings();
+                        //ConfigSettings.ChangeSettings();
                         new Summon().call(new SiteCeator());    //Sites.CheckAvailability();
                         new Summon().call(new MSQLCreator());   //MsSQL.CheckAvailability();
 
@@ -47,6 +48,7 @@ namespace TestTask
                 {
                     Console.WriteLine("Приложение было запущено с параметром");
                     Console.WriteLine("Данные последней проверки");
+
                     Sites.DessirializeData(File.ReadAllText("SiteFile.json"));
                     MsSQL.DessirializeData(File.ReadAllText("FileSQLServer.json"));
                 }
@@ -57,45 +59,4 @@ namespace TestTask
             }
         }
     }
-
-    //
-    //abstract class CheckAvailability
-    //{
-    //    public abstract IAvailable Check_Object();
-
-    //    public void CheckOperation()
-    //    {
-    //        var check = Check_Object();
-    //        check.CheckAvailability();
-    //    }
-    //}
-
-    //class SiteCeator : CheckAvailability
-    //{
-    //    public override IAvailable Check_Object()
-    //    {
-    //        return new Sites();
-    //    }
-    //}
-
-    //class MSQLCreator : CheckAvailability
-    //{
-    //    public override IAvailable Check_Object()
-    //    {
-    //        return new MsSQL();
-    //    }
-    //}
-
-    //public interface IAvailable
-    //{
-    //    void CheckAvailability();
-    //}
-
-    //class Summon
-    //{
-    //    public void call(CheckAvailability check)
-    //    {
-    //        check.CheckOperation();
-    //    }
-    //}
 }

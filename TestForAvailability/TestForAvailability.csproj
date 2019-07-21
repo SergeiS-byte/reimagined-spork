@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MSqlPr\MSqlPr.csproj" />
+    <ProjectReference Include="..\SitePr\SitePr.csproj" />
     <ProjectReference Include="..\TestTask\TestTask.csproj" />
   </ItemGroup>
 
