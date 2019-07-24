@@ -7,6 +7,9 @@ using System.IO;
 using System.Net.NetworkInformation;
 using InterfacePr;
 using UserStructure;
+using Unity;
+using Microsoft.Practices.Unity.Configuration;
+using Microsoft.Practices.Unity.InterceptionExtension;
 
 namespace SitePr
 {
@@ -31,6 +34,12 @@ namespace SitePr
     {
         public void CheckAvailability()
         {
+            Console.WriteLine("Начало");
+            var container = new UnityContainer();
+            container.LoadConfiguration("DataAccessProvider");
+            Program mc = container.Resolve<Program>();
+            Console.WriteLine("Конец");
+
             SiteData data = new SiteData();
             data.date = new DateTime();
 

@@ -8,6 +8,8 @@ using SitePr;
 using MSqlPr;
 using Unity;
 using Microsoft.Practices.Unity.Configuration;
+//using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.InterceptionExtension;
 
 namespace TestTask
 {
@@ -18,7 +20,13 @@ namespace TestTask
             try
             {
                 if (args.Length == 0)
-                {                    
+                {
+                    Console.WriteLine("Начало");
+                    var container = new UnityContainer();
+                    container.LoadConfiguration();//"DataAccessProvider"
+                    var mc = container.Resolve<Program>();
+                    Console.WriteLine("Конец");
+
                     Console.WriteLine("Приложение было запущено без параметра");
                     SetSettings.Settings();
                     //Console.WriteLine("Параметры файла конфигурации");
