@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Configuration;
 using System.Collections.Specialized;
 using InterfacePr;
+using UserStructure;
 
 namespace MSqlPr
 {
@@ -38,9 +39,10 @@ namespace MSqlPr
             while (true)
             {
                 try
-                {                   
-                    
-                    string ServerName = ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
+                {
+                    StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+
+                    string ServerName = (section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
                     Console.WriteLine("\nИмя SQL сервера, к которому вы подключаетесь {0}", ServerName);
 
                     if (ServerName != null)

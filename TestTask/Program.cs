@@ -8,8 +8,8 @@ using SitePr;
 using MSqlPr;
 using Unity;
 using Microsoft.Practices.Unity.Configuration;
-//using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.InterceptionExtension;
+using UserStructure;
+using EmailSender;
 
 namespace TestTask
 {
@@ -20,15 +20,9 @@ namespace TestTask
             try
             {
                 if (args.Length == 0)
-                {
-                    Console.WriteLine("Начало");
-                    var container = new UnityContainer();
-                    container.LoadConfiguration();//"DataAccessProvider"
-                    var mc = container.Resolve<Program>();
-                    Console.WriteLine("Конец");
-
+                {                    
                     Console.WriteLine("Приложение было запущено без параметра");
-                    SetSettings.Settings();
+                    UserStructure.SetSettings.Settings();//UserStructure - убрать
                     //Console.WriteLine("Параметры файла конфигурации");
                     ConfigSettings.ReadAllSettings();
                     //Console.WriteLine();
@@ -48,7 +42,7 @@ namespace TestTask
                         new Summon().call(new SiteCeator());    //Sites.CheckAvailability();
                         new Summon().call(new MSQLCreator());   //MsSQL.CheckAvailability();
 
-                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json");
+                        EmailSender.SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json");
                     }
                     else Console.WriteLine("Должно быть введено 1 или 2");
                 }
