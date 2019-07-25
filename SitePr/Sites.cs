@@ -29,9 +29,19 @@ namespace SitePr
 
     public class Sites : IAvailable
     {
+        private string SiteID;
+
         public string SitePingData
         {
-            get { return section.FolderItems[0].Path; }
+            get { return SiteID; }
+        }
+
+        public Sites()
+        {
+            Ping ping = new Ping();
+            section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+            PingReply pingReply = ping.Send(("www.ya.ru"));
+            SiteID = pingReply.Address.ToString();
         }
 
         StartupFoldersConfigSection section;
@@ -42,22 +52,22 @@ namespace SitePr
             data.date = new DateTime();
 
             Ping ping = new Ping();
-            Console.WriteLine("\nсайта для пинга:");
+            //Console.WriteLine("\nсайта для пинга:");
 
-            while (true)
-            {
+            //while (true)
+            //{
                 section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
                 //string siteName = ConfigurationManager.AppSettings["siteName"];//Convert.ToString(Console.ReadLine());
-                Console.WriteLine("section"+section.FolderItems[0].Path);
+                //Console.WriteLine("section"+section.FolderItems[0].Path);
                 try
                 {
                     PingReply pingReply = ping.Send((section.FolderItems[0].Path));
 
-                    if (pingReply.Address != null)
+                    if (pingReply != null)
                     {
-                        Console.WriteLine("Address - " + pingReply.Address);
-                        Console.WriteLine("Status - " + pingReply.Status);
+                        //Console.WriteLine("Address - " + pingReply.Address);
+                        //Console.WriteLine("Status - " + pingReply.Status);
 
                         data.date = DateTime.Now;
                         data.Address = pingReply.Address.ToString();
@@ -65,9 +75,9 @@ namespace SitePr
 
                         string json = JsonConvert.SerializeObject(data);
                         File.WriteAllText("SiteFile.json", "");
-                        File.AppendAllText("SiteFile.json", json); 
+                        File.AppendAllText("SiteFile.json", json);
 
-                        break;
+                        //break;
                     }
                 }
                 catch (Exception ex)
@@ -76,13 +86,13 @@ namespace SitePr
                     //Доступно - www.yandex.ru
                     Console.WriteLine("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта" + ex);
                 }
-            }
+            //}
         }
 
         public static void DessirializeData(string data)
         {
             SiteData siteData = JsonConvert.DeserializeObject<SiteData>(data);
-            Console.WriteLine("date " + siteData.date + " Address " + siteData.Address + " Status " + siteData.Status);
+            //Console.WriteLine("date " + siteData.date + " Address " + siteData.Address + " Status " + siteData.Status);
         }
     }
 }
