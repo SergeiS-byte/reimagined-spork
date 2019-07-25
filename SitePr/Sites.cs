@@ -29,6 +29,13 @@ namespace SitePr
 
     public class Sites : IAvailable
     {
+        public string SitePingData
+        {
+            get { return section.FolderItems[0].Path; }
+        }
+
+        StartupFoldersConfigSection section;
+
         public void CheckAvailability()
         {
             SiteData data = new SiteData();
@@ -39,7 +46,7 @@ namespace SitePr
 
             while (true)
             {
-                StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+                section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
                 //string siteName = ConfigurationManager.AppSettings["siteName"];//Convert.ToString(Console.ReadLine());
                 Console.WriteLine("section"+section.FolderItems[0].Path);
