@@ -6,7 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using UserStructure;
+using UserStructureDLL;
 
 namespace EmailSender
 {

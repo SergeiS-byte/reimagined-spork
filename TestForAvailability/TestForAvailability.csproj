@@ -15,12 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EmailSender\EmailSender.csproj" />
-    <ProjectReference Include="..\InterfacePr\InterfacePr.csproj" />
-    <ProjectReference Include="..\MSqlPr\MSqlPr.csproj" />
-    <ProjectReference Include="..\SitePr\SitePr.csproj" />
     <ProjectReference Include="..\TestTask\TestTask.csproj" />
-    <ProjectReference Include="..\UserStructure\UserStructure.csproj" />
   </ItemGroup>
 
 </Project>

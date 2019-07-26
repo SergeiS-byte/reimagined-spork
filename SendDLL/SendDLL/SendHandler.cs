@@ -1,31 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Mail;
-using System.Net;
 using System.Configuration;
-using System.Collections.Specialized;
+using System.Net;
+using System.Net.Mail;
+using UserStructureDLL;
 
-namespace TestTask
+namespace SendDLL
 {
-    class SendigToEmail
+    public class SendHandler
+    {
+    }
+
+    public class SendigToEmail
     {
         //отправка файлов с данными на почту
         public static void SendMessage(string SiteFile, string SQLFile)
         {
             try
             {
-                string SenderEmail = ConfigurationManager.AppSettings["SenderEmail"];   //Convert.ToString(Console.ReadLine());
+                StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+
+                string SenderEmail = (section.FolderItems[2].Path);//ConfigurationManager.AppSettings["SenderEmail"];   //Convert.ToString(Console.ReadLine());
                 Console.WriteLine("email с которго будет отправлен результат проверки: " + SenderEmail);
 
-                string SenderName = ConfigurationManager.AppSettings["SenderName"];
+                string SenderName = (section.FolderItems[3].Path);//ConfigurationManager.AppSettings["SenderName"];
                 Console.WriteLine("имя, которым будет подписано письмо: " + SenderName);
 
                 MailAddress from = new MailAddress(SenderEmail, SenderName);
 
-                string Receiver = ConfigurationManager.AppSettings["Receiver"];
+                string Receiver = (section.FolderItems[4].Path);//ConfigurationManager.AppSettings["Receiver"];
                 Console.WriteLine("email, которому будет отправлено письмо: " + Receiver);
 
                 MailAddress to = new MailAddress(Receiver);
@@ -36,7 +38,7 @@ namespace TestTask
                 message.Attachments.Add(new Attachment(SiteFile));
                 message.Attachments.Add(new Attachment(SQLFile));
 
-                string smtpServ = ConfigurationManager.AppSettings["smtpServ"];
+                string smtpServ = (section.FolderItems[5].Path);//ConfigurationManager.AppSettings["smtpServ"];
                 Console.WriteLine("smtp Server, с которого будет произведена отправка: " + smtpServ);
 
                 SmtpClient smtp = new SmtpClient(smtpServ, 587);
@@ -48,7 +50,7 @@ namespace TestTask
                 {
                     var key = Console.ReadKey(true);
 
-                    if (key.Key == ConsoleKey.Enter) break; 
+                    if (key.Key == ConsoleKey.Enter) break;
 
                     Console.Write("*");
                     password += key.KeyChar;
@@ -60,9 +62,9 @@ namespace TestTask
                 smtp.Send(message);
 
             }
-            catch //(Exception ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("Сообщение не было отправлено ");
+                Console.WriteLine("Сообщение не было отправлено " + ex);
             }
         }
     }

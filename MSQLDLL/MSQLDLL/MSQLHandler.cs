@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Data;
-using System.Data.Sql;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
-using Microsoft.SqlServer.Management.Smo;
-using Newtonsoft.Json;
-using System.Net.Mail;
-using System.Configuration;
-using System.Collections.Specialized;
 using InterfaceDLL;
-using UserStructure;
+using Newtonsoft.Json;
+using UserStructureDLL;
 
-namespace MSqlPr
+namespace MSQLDLL
 {
+    public class MSQLHandler
+    {
+
+    }
+
     public class MSQLCreator : CheckAvailability
     {
         public override IAvailable Check_Object()
@@ -29,7 +29,7 @@ namespace MSqlPr
     }
 
     public class MsSQL : IAvailable
-    {      
+    {
         //проверка доступности SQL Server
         public void CheckAvailability()
         {
@@ -40,9 +40,9 @@ namespace MSqlPr
             {
                 try
                 {
-                    StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+                    //StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
-                    string ServerName = (section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
+                    string ServerName = "DESKTOP-CODCI6J";//(section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
                     Console.WriteLine("\nИмя SQL сервера, к которому вы подключаетесь {0}", ServerName);
 
                     if (ServerName != null)
@@ -51,7 +51,7 @@ namespace MSqlPr
                         {
                             DataSource = @"" + ServerName,
                             //InitialCatalog = DBName,
-                            IntegratedSecurity = true,                            
+                            IntegratedSecurity = true,
                         }.ConnectionString;
 
                         //как индикатор того, что подключение к серверу установлено здесь выводится версия сервера, в моем случае это 14.00.1000

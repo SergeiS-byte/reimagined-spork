@@ -1,15 +1,11 @@
-﻿using System.Configuration;
-using System.Collections.Specialized;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
-using InterfacePr;
-using SitePr;
-using MSqlPr;
-using Unity;
-using Microsoft.Practices.Unity.Configuration;
-using UserStructure;
-using EmailSender;
+using InterfaceDLL;
+using MSQLDLL;
+using SiteDLL;
+using UserStructureDLL;
+using SendDLL;
+
 
 namespace TestTask
 {
@@ -22,7 +18,7 @@ namespace TestTask
                 if (args.Length == 0)
                 {                    
                     Console.WriteLine("Приложение было запущено без параметра");
-                    UserStructure.SetSettings.Settings();//UserStructure - убрать
+                    SetSettings.Settings();//UserStructure - убрать
                     //Console.WriteLine("Параметры файла конфигурации");
                     ConfigSettings.ReadAllSettings();
                     //Console.WriteLine();
@@ -42,7 +38,7 @@ namespace TestTask
                         new Summon().call(new SiteCeator());    //Sites.CheckAvailability();
                         new Summon().call(new MSQLCreator());   //MsSQL.CheckAvailability();
 
-                        EmailSender.SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json");
+                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json");
                     }
                     else Console.WriteLine("Должно быть введено 1 или 2");
                 }

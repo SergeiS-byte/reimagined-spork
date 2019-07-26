@@ -5,14 +5,15 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net.NetworkInformation;
-using InterfacePr;
 using UserStructure;
+using InterfaceDLL;
 
 namespace SitePr
 {
 
     public class SiteCeator : CheckAvailability
     {
+        
         public override IAvailable Check_Object()
         {
             return new Sites();
