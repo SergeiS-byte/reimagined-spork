@@ -17,17 +17,17 @@ namespace SendDLL
         {
             try
             {
-                StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
+                //StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
-                string SenderEmail = (section.FolderItems[2].Path);//ConfigurationManager.AppSettings["SenderEmail"];   //Convert.ToString(Console.ReadLine());
+                string SenderEmail = "serega.sann@mail.ru"; // (section.FolderItems[2].Path);//ConfigurationManager.AppSettings["SenderEmail"];   //Convert.ToString(Console.ReadLine());
                 Console.WriteLine("email с которго будет отправлен результат проверки: " + SenderEmail);
 
-                string SenderName = (section.FolderItems[3].Path);//ConfigurationManager.AppSettings["SenderName"];
+                string SenderName = "Test"; // (section.FolderItems[3].Path);//ConfigurationManager.AppSettings["SenderName"];
                 Console.WriteLine("имя, которым будет подписано письмо: " + SenderName);
 
                 MailAddress from = new MailAddress(SenderEmail, SenderName);
 
-                string Receiver = (section.FolderItems[4].Path);//ConfigurationManager.AppSettings["Receiver"];
+                string Receiver = "serega.sann@mail.ru"; // (section.FolderItems[4].Path);//ConfigurationManager.AppSettings["Receiver"];
                 Console.WriteLine("email, которому будет отправлено письмо: " + Receiver);
 
                 MailAddress to = new MailAddress(Receiver);
@@ -38,7 +38,7 @@ namespace SendDLL
                 message.Attachments.Add(new Attachment(SiteFile));
                 message.Attachments.Add(new Attachment(SQLFile));
 
-                string smtpServ = (section.FolderItems[5].Path);//ConfigurationManager.AppSettings["smtpServ"];
+                string smtpServ = "smtp.mail.ru"; // (section.FolderItems[5].Path);//ConfigurationManager.AppSettings["smtpServ"];
                 Console.WriteLine("smtp Server, с которого будет произведена отправка: " + smtpServ);
 
                 SmtpClient smtp = new SmtpClient(smtpServ, 587);

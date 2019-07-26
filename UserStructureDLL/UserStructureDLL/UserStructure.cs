@@ -115,10 +115,12 @@ namespace UserStructureDLL
                 }
                 else if (param == "нет")
                 {
-                    for (int j = 0; j < 6; j++)
+                    /*for (int j = 0; j < 6; j++)
                     {
-                        Show(j);
-                    }
+                        //Show(j);
+                        
+                    }*/
+                    Console.WriteLine("Ничего не изменено");
                     break;
                 }
                 else Console.WriteLine("Введите да или нет");

@@ -18,7 +18,7 @@ namespace TestTask
                 if (args.Length == 0)
                 {                    
                     Console.WriteLine("Приложение было запущено без параметра");
-                    SetSettings.Settings();//UserStructure - убрать
+                    //SetSettings.Settings();//UserStructure - убрать
                     //Console.WriteLine("Параметры файла конфигурации");
                     ConfigSettings.ReadAllSettings();
                     //Console.WriteLine();

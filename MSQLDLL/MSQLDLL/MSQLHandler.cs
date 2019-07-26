@@ -77,9 +77,10 @@ namespace MSQLDLL
                         Console.WriteLine("Имя не введено");
                 }
 
-                catch
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Введено неверное имя сервера или введённый вами сервер недоступен");
+                    Console.WriteLine("Введено неверное имя сервера или введённый вами сервер недоступен \n" + ex);
+                    break;
                 }
             }
         }

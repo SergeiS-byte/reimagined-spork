@@ -39,8 +39,9 @@
     <Reference Include="DynamicTypeBuilder_NET452, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicTypeBuilder.1.0.4\lib\.NET452\DynamicTypeBuilder_NET452.dll</HintPath>
     </Reference>
-    <Reference Include="InterfaceDLL">
-      <HintPath>..\..\InterfaceDLL\InterfaceDLL\bin\Debug\netstandard2.0\InterfaceDLL.dll</HintPath>
+    <Reference Include="InterfaceDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\InterfaceDLL\InterfaceDLL\bin\Debug\netstandard2.0\InterfaceDLL.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Tools.Sql.BatchParser, Version=15.1.18097.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Tools.Sql.BatchParser.150.18097.0-xplat\lib\netstandard2.0\Microsoft.Data.Tools.Sql.BatchParser.dll</HintPath>
@@ -69,18 +70,19 @@
     <Reference Include="Microsoft.SqlServer.Smo, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Scripting.11.0.2100.61\lib\Microsoft.SqlServer.Smo.dll</HintPath>
     </Reference>
-    <Reference Include="MSQLDLL">
-      <HintPath>..\..\MSQLDLL\MSQLDLL\bin\Debug\MSQLDLL.dll</HintPath>
+    <Reference Include="MSQLDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MSQLDLL\MSQLDLL\bin\Debug\MSQLDLL.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SendDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SendDLL">
       <HintPath>..\SendDLL\SendDLL\bin\Debug\SendDLL.dll</HintPath>
     </Reference>
-    <Reference Include="SiteDLL">
-      <HintPath>..\..\SiteDLL\SiteDLL\bin\Debug\SiteDLL.dll</HintPath>
+    <Reference Include="SiteDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SiteDLL\SiteDLL\bin\Debug\SiteDLL.dll</HintPath>
     </Reference>
     <Reference Include="Sorschia2, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sorschia2.1.1.0-pre3\lib\netstandard2.0\Sorschia2.dll</HintPath>
@@ -139,8 +141,9 @@
     <Reference Include="Unity.Interception, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Interception.5.11.1\lib\net46\Unity.Interception.dll</HintPath>
     </Reference>
-    <Reference Include="UserStructureDLL">
-      <HintPath>..\..\UserStructureDLL\UserStructureDLL\bin\Debug\UserStructureDLL.dll</HintPath>
+    <Reference Include="UserStructureDLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UserStructureDLL\UserStructureDLL\bin\Debug\UserStructureDLL.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
