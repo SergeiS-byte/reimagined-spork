@@ -21,14 +21,14 @@ namespace TestTask
                 if (args.Length == 0)
                 {                    
                     Console.WriteLine("Приложение было запущено без параметра");
-                    //SetSettings.Settings();//UserStructure - убрать
+                    SetSettings.Settings();//UserStructure - убрать
                     //Console.WriteLine("Параметры файла конфигурации");
                     List<string> SendingData = new List<string>();
 
-                    SendingData[0] = section.FolderItems[2].Path;
-                    SendingData[1] = section.FolderItems[3].Path;
-                    SendingData[2] = section.FolderItems[4].Path;
-                    SendingData[3] = section.FolderItems[5].Path;
+                    SendingData.Add(section.FolderItems[2].Path);
+                    SendingData.Add(section.FolderItems[3].Path);
+                    SendingData.Add(section.FolderItems[4].Path);
+                    SendingData.Add(section.FolderItems[5].Path);
 
                     ConfigSettings.ReadAllSettings();
                     //Console.WriteLine();

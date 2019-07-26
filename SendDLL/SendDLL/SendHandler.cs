@@ -18,6 +18,7 @@ namespace SendDLL
         {
             try
             {
+                Console.WriteLine("Количество " + Data.Count);
                 //StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
                 string SenderEmail = Data[0];//"serega.sann@mail.ru"; // (section.FolderItems[2].Path);//ConfigurationManager.AppSettings["SenderEmail"];   //Convert.ToString(Console.ReadLine());
