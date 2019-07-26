@@ -18,4 +18,10 @@
     <ProjectReference Include="..\TestTask\TestTask.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SiteDLL">
+      <HintPath>..\SiteDLL\SiteDLL\bin\Debug\SiteDLL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

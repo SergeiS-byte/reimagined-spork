@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 using System.IO;
 using InterfaceDLL;
 using Newtonsoft.Json;
-using UserStructureDLL;
 
 namespace MSQLDLL
 {
@@ -15,9 +14,9 @@ namespace MSQLDLL
 
     public class MSQLCreator : CheckAvailability
     {
-        public override IAvailable Check_Object()
+        public override IAvailable Check_Object(string Data)
         {
-            return new MsSQL();
+            return new MsSQL(Data);
         }
     }
 
@@ -28,8 +27,15 @@ namespace MSQLDLL
         public string Version;
     }
 
-    public class MsSQL : IAvailable
+    public class MsSQL : IAvailable 
     {
+        private string processingData;
+
+        public MsSQL(string data)
+        {
+            processingData = data;
+        }
+
         //проверка доступности SQL Server
         public void CheckAvailability()
         {
@@ -40,9 +46,8 @@ namespace MSQLDLL
             {
                 try
                 {
-                    //StartupFoldersConfigSection section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
 
-                    string ServerName = "DESKTOP-CODCI6J";//(section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
+                    string ServerName = processingData;//(section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
                     Console.WriteLine("\nИмя SQL сервера, к которому вы подключаетесь {0}", ServerName);
 
                     if (ServerName != null)

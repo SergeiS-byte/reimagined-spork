@@ -48,7 +48,7 @@ namespace UserStructureDLL
             set { base["folderType"] = value; }
         }
 
-        [ConfigurationProperty("path", DefaultValue = "", IsKey = true/*false*/, IsRequired = true/*false*/)]
+        [ConfigurationProperty("path", DefaultValue = "", IsKey = /*true*/false, IsRequired = /*true*/false)]
         public string Path
         {
             get { return ((string)(base["path"])); }
@@ -115,12 +115,10 @@ namespace UserStructureDLL
                 }
                 else if (param == "нет")
                 {
-                    /*for (int j = 0; j < 6; j++)
+                    for (int j = 0; j < 6; j++)
                     {
-                        //Show(j);
-                        
-                    }*/
-                    Console.WriteLine("Ничего не изменено");
+                        Show(j);
+                    }
                     break;
                 }
                 else Console.WriteLine("Введите да или нет");

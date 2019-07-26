@@ -1,5 +1,4 @@
 ﻿using InterfaceDLL;
-using UserStructureDLL;
 using System;
 using System.Net.NetworkInformation;
 using System.Configuration;
@@ -15,9 +14,9 @@ namespace SiteDLL
     public class SiteCeator : CheckAvailability
     {
 
-        public override IAvailable Check_Object()
+        public override IAvailable Check_Object(string Data)
         {
-            return new Sites();
+            return new Sites(Data);
         }
     }
 
@@ -32,21 +31,21 @@ namespace SiteDLL
     public class Sites : IAvailable
     {
         private string SiteID;
+        private string processingData;
 
         public string SitePingData
         {
             get { return SiteID; }
         }
 
-        public Sites()
+        public Sites(string data)
         {
-            Ping ping = new Ping();
-            //section = (StartupFoldersConfigSection)ConfigurationManager.GetSection("StartupFolders");
-            PingReply pingReply = ping.Send(("www.ya.ru"));
-            SiteID = pingReply.Address.ToString();
-        }
+            processingData = data;
 
-        StartupFoldersConfigSection section;
+            Ping ping = new Ping();
+            PingReply pingReply = ping.Send(data);
+            SiteID = pingReply.Address.ToString();
+        }        
 
         public void CheckAvailability()
         {
@@ -54,7 +53,6 @@ namespace SiteDLL
             data.date = new DateTime();
 
             Ping ping = new Ping();
-            //Console.WriteLine("\nсайта для пинга:");
 
             //while (true)
             //{
@@ -64,7 +62,7 @@ namespace SiteDLL
             //Console.WriteLine("section"+section.FolderItems[0].Path);
             try
             {
-                PingReply pingReply = ping.Send((/*section.FolderItems[0].Path*/"www.ya.ru"));
+                PingReply pingReply = ping.Send((/*section.FolderItems[0].Path*/processingData));
 
                 if (pingReply != null)
                 {
