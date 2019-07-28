@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using InterfaceDLL;
 using Newtonsoft.Json;
+using RemoveWriteLines;
+using Unity;
 
 namespace MSQLDLL
 {
@@ -30,10 +31,16 @@ namespace MSQLDLL
     public class MsSQL : IAvailable 
     {
         private string processingData;
+        private string ServData;
 
         public MsSQL(string data)
         {
             processingData = data;
+        }
+
+        public string MSQlRequest
+        {
+            get { return ServData; }
         }
 
         //проверка доступности SQL Server
@@ -48,7 +55,7 @@ namespace MSQLDLL
                 {
 
                     string ServerName = processingData;//(section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
-                    Console.WriteLine("\nИмя SQL сервера, к которому вы подключаетесь {0}", ServerName);
+                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("\nИмя SQL сервера, к которому вы подключаетесь" + ServerName);
 
                     if (ServerName != null)
                     {
@@ -64,8 +71,9 @@ namespace MSQLDLL
                         using (var sConn = new SqlConnection(sConnStr))
                         {
                             sConn.Open();
-                            Console.WriteLine("Версия сервера: " + Convert.ToString(sConn.ServerVersion));
-                            Console.WriteLine("Подключение к SQL Server установлено, сервер доступен");
+                            unityData.container.Resolve<Bootstrapper>().WriteAndGo("Версия сервера: " + Convert.ToString(sConn.ServerVersion));
+                            unityData.container.Resolve<Bootstrapper>().WriteAndGo("Подключение к SQL Server установлено, сервер доступен");
+                            ServData = sConn.ServerVersion;
 
                             serverData.date = DateTime.Now;
                             serverData.Server = sConn.DataSource;
@@ -79,12 +87,12 @@ namespace MSQLDLL
                         }
                     }
                     else
-                        Console.WriteLine("Имя не введено");
+                        unityData.container.Resolve<Bootstrapper>().WriteAndGo("Имя не введено");
                 }
 
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Введено неверное имя сервера или введённый вами сервер недоступен \n" + ex);
+                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сервера или введённый вами сервер недоступен \n" + ex);
                     break;
                 }
             }
@@ -93,7 +101,7 @@ namespace MSQLDLL
         public static void DessirializeData(string data)
         {
             SQLServerData SQLData = JsonConvert.DeserializeObject<SQLServerData>(data);
-            Console.WriteLine("date " + SQLData.date + " Server " + SQLData.Server + " Version " + SQLData.Version);
+            unityData.container.Resolve<Bootstrapper>().WriteAndGo("date " + SQLData.date + " Server " + SQLData.Server + " Version " + SQLData.Version);
         }
     }
 }

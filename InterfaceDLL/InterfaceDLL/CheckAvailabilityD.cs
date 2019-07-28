@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace InterfaceDLL
+﻿namespace InterfaceDLL
 {
     abstract public class CheckAvailability
     {

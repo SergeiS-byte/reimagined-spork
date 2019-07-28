@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSQLDLL", "MSQLDLL\MSQLDLL\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfaceDLL", "InterfaceDLL\InterfaceDLL\InterfaceDLL.csproj", "{D9E3FA12-D3F2-4ADE-86F2-CF1F81078589}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoveConsole", "RemoveWriteLines\RemoveConsole.csproj", "{5C152EB4-057B-4898-A89A-DA66D196D360}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D9E3FA12-D3F2-4ADE-86F2-CF1F81078589}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9E3FA12-D3F2-4ADE-86F2-CF1F81078589}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9E3FA12-D3F2-4ADE-86F2-CF1F81078589}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C152EB4-057B-4898-A89A-DA66D196D360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C152EB4-057B-4898-A89A-DA66D196D360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C152EB4-057B-4898-A89A-DA66D196D360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C152EB4-057B-4898-A89A-DA66D196D360}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Unity;
+using RemoveWriteLines;
 
 namespace UserStructureDLL
 {
@@ -58,42 +56,42 @@ namespace UserStructureDLL
 
     public class SetSettings
     {
-        private static void Show(int num)
+        private static void Show(int num, UnityContainer container)
         {
             Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             StartupFoldersConfigSection section = (StartupFoldersConfigSection)cfg.Sections["StartupFolders"]; //не может загрузить из конфига
 
             if (section != null)
             {
-                Console.Write(section.FolderItems[num].FolderType + ": ");
-                Console.WriteLine(section.FolderItems[num].Path);
+                container.Resolve<Bootstrapper>().WriteAndGo(section.FolderItems[num].FolderType + ": ");
+                container.Resolve<Bootstrapper>().WriteAndGo(section.FolderItems[num].Path);
 
                 //cfg.Save(); 
             }
         }
 
-        private static void Set(int num)
+        private static void Set(int num, UnityContainer container)
         {
             Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             StartupFoldersConfigSection section = (StartupFoldersConfigSection)cfg.Sections["StartupFolders"];
 
             if (section != null)
             {
-                Console.WriteLine("Старое значение ");
+                container.Resolve<Bootstrapper>().WriteAndGo("Старое значение ");
 
-                Show(num);
+                Show(num, container);
 
-                Console.WriteLine("Введите новое значение ");
-                section.FolderItems[num].Path = Convert.ToString(Console.ReadLine());
+                container.Resolve<Bootstrapper>().WriteAndGo("Введите новое значение ");
+                section.FolderItems[num].Path = Convert.ToString(container.Resolve<ReplaceConsole>().ReadD());
 
                 cfg.Save(); //устанавливает перенос на новую строку и производит проверку <exename>.vshost.exe.config файла в вашей отладочной папке.
             }
         }
 
-        public static void Settings()
+        public static void Settings(UnityContainer container)
         {
 
-            Console.WriteLine("Для изменения в файле конфигурации доступны следующие параметры:\n\n" +
+            container.Resolve<Bootstrapper>().WriteAndGo("Для изменения в файле конфигурации доступны следующие параметры:\n\n" +
                 "1. siteName - имя сайта для парса,\n" +
                 "2. ServerName - имя сервера MSSQL,\n" +
                 "3. SenderEmail - почта, с которой будет отправлено письмо,\n" +
@@ -103,25 +101,25 @@ namespace UserStructureDLL
 
             while (true)
             {
-                Console.WriteLine("Вы хотите изменить какой-либо параметр? да/нет\nПри выборе 'нет' будут выведены текущие настройки");
-                string param = Convert.ToString(Console.ReadLine());
+                container.Resolve<Bootstrapper>().WriteAndGo("Вы хотите изменить какой-либо параметр? да/нет\nПри выборе 'нет' будут выведены текущие настройки");
+                string param = Convert.ToString(container.Resolve<ReplaceConsole>().ReadD());
 
                 if (param == "да")
                 {
-                    Console.WriteLine("Какой параметр вы хотите изменить? 1-6");
-                    int ConfigNum = Convert.ToInt16(Console.ReadLine());
-                    if ((ConfigNum <= 6) && (ConfigNum >= 1)) Set(ConfigNum - 1);
-                    else Console.WriteLine("Введено неправильное значение, нужно ввести номер нужного параметра (1-6)");
+                    container.Resolve<Bootstrapper>().WriteAndGo("Какой параметр вы хотите изменить? 1-6");
+                    int ConfigNum = Convert.ToInt16(container.Resolve<ReplaceConsole>().ReadD());
+                    if ((ConfigNum <= 6) && (ConfigNum >= 1)) Set(ConfigNum - 1, container);
+                    else container.Resolve<Bootstrapper>().WriteAndGo("Введено неправильное значение, нужно ввести номер нужного параметра (1-6)");
                 }
                 else if (param == "нет")
                 {
                     for (int j = 0; j < 6; j++)
                     {
-                        Show(j);
+                        Show(j, container);
                     }
                     break;
                 }
-                else Console.WriteLine("Введите да или нет");
+                else container.Resolve<Bootstrapper>().WriteAndGo("Введите да или нет");
             }
         }
     }

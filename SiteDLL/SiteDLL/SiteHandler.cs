@@ -1,14 +1,16 @@
 ﻿using InterfaceDLL;
 using System;
 using System.Net.NetworkInformation;
-using System.Configuration;
 using Newtonsoft.Json;
 using System.IO;
+using RemoveWriteLines;
+using Unity;
 
 namespace SiteDLL
 {
     public class SiteHandler
     {
+
     }
 
     public class SiteCeator : CheckAvailability
@@ -62,13 +64,10 @@ namespace SiteDLL
             //Console.WriteLine("section"+section.FolderItems[0].Path);
             try
             {
-                PingReply pingReply = ping.Send((/*section.FolderItems[0].Path*/processingData));
+                PingReply pingReply = ping.Send((processingData));
 
                 if (pingReply != null)
                 {
-                    //Console.WriteLine("Address - " + pingReply.Address);
-                    //Console.WriteLine("Status - " + pingReply.Status);
-
                     data.date = DateTime.Now;
                     data.Address = pingReply.Address.ToString();
                     data.Status = pingReply.Status.ToString();
@@ -76,15 +75,13 @@ namespace SiteDLL
                     string json = JsonConvert.SerializeObject(data);
                     File.WriteAllText("SiteFile.json", "");
                     File.AppendAllText("SiteFile.json", json);
-
-                    //break;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
                 //Недоступно - www.euroset.ru
                 //Доступно - www.yandex.ru
-                Console.WriteLine("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта" + ex);
+                unityData.container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта");
             }
             //}
         }

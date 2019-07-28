@@ -1,6 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestTask;
 using SiteDLL;
+using MSQLDLL;
+using System;
+using System.Data.SqlClient;
+using System.IO;
 
 namespace TestForAvailability
 {
@@ -18,6 +22,20 @@ namespace TestForAvailability
 
             string actual = site.SitePingData;
             Assert.AreEqual(Expected, actual, "The programm does not work correctly");
+        }
+
+        [TestMethod]
+        public void ServerAccess()
+        {
+            string ServerName = "DESKTOP-CODCI6J";
+            string Expected = "14.00.1000";
+            MsSQL ms = new MsSQL(ServerName);
+
+            ms.CheckAvailability();
+
+            string actual = ms.MSQlRequest;
+            Assert.AreEqual(Expected, actual, "The programm does not work correctly");
+
         }
     }
 }
