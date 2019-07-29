@@ -45,17 +45,17 @@ namespace TestTask
                     if (param == "да")
                     {
                         //ConfigSettings.ChangeSettings();
-                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path);    //Sites.CheckAvailability();
-                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path);   //MsSQL.CheckAvailability();
+                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path, unityData.container);    //Sites.CheckAvailability();
+                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path, unityData.container);   //MsSQL.CheckAvailability();
 
-                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData);
+                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData, unityData.container);
                     }
                     else if (param == "нет")
                     {
-                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path);    //Sites.CheckAvailability();
-                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path);   //MsSQL.CheckAvailability();
+                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path, unityData.container);    //Sites.CheckAvailability();
+                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path, unityData.container);   //MsSQL.CheckAvailability();
 
-                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData);
+                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData, unityData.container);
                     }
                     else unityData.container.Resolve<Bootstrapper>().WriteAndGo("Должно быть введено 1 или 2");
                 }
@@ -65,12 +65,12 @@ namespace TestTask
                     unityData.container.Resolve<Bootstrapper>().WriteAndGo("Данные последней проверки");
 
                     Sites.DessirializeData(File.ReadAllText("SiteFile.json"));
-                    MsSQL.DessirializeData(File.ReadAllText("FileSQLServer.json"));
+                    MsSQL.DessirializeData(File.ReadAllText("FileSQLServer.json"), unityData.container);
                 }
             }
             catch 
             {
-                unityData.container.Resolve<Bootstrapper>().WriteAndGo("Программа не сработала");
+                unityData.container.Resolve<Bootstrapper>().WriteAndGo("Программа не сработала, попробуйте ее перезапустить");
             }
         }
     }
