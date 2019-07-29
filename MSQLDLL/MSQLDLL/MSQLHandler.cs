@@ -15,9 +15,9 @@ namespace MSQLDLL
 
     public class MSQLCreator : CheckAvailability
     {
-        public override IAvailable Check_Object(string Data, UnityContainer container)
+        public override IAvailable Check_Object(string Data)
         {
-            return new MsSQL(Data, container);
+            return new MsSQL(Data);
         }
     }
 
@@ -32,12 +32,10 @@ namespace MSQLDLL
     {
         private string processingData;
         private string ServData;
-        UnityContainer _container;
 
-        public MsSQL(string data, UnityContainer container)
+        public MsSQL(string data)
         {
             processingData = data;
-            _container = container;
         }
 
         public string MSQlRequest
@@ -57,7 +55,7 @@ namespace MSQLDLL
                 {
 
                     string ServerName = processingData;//(section.FolderItems[1].Path);//ConfigurationManager.AppSettings["ServerName"]; //Convert.ToString(Console.ReadLine());
-                    _container.Resolve<Bootstrapper>().WriteAndGo("\nИмя SQL сервера, к которому вы подключаетесь" + ServerName);
+                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("\nИмя SQL сервера, к которому вы подключаетесь" + ServerName);
 
                     if (ServerName != null)
                     {
@@ -73,8 +71,8 @@ namespace MSQLDLL
                         using (var sConn = new SqlConnection(sConnStr))
                         {
                             sConn.Open();
-                            _container.Resolve<Bootstrapper>().WriteAndGo("Версия сервера: " + Convert.ToString(sConn.ServerVersion));
-                            _container.Resolve<Bootstrapper>().WriteAndGo("Подключение к SQL Server установлено, сервер доступен");
+                            unityData.container.Resolve<Bootstrapper>().WriteAndGo("Версия сервера: " + Convert.ToString(sConn.ServerVersion));
+                            unityData.container.Resolve<Bootstrapper>().WriteAndGo("Подключение к SQL Server установлено, сервер доступен");
                             ServData = sConn.ServerVersion;
 
                             serverData.date = DateTime.Now;
@@ -89,21 +87,21 @@ namespace MSQLDLL
                         }
                     }
                     else
-                        _container.Resolve<Bootstrapper>().WriteAndGo("Имя не введено");
+                        unityData.container.Resolve<Bootstrapper>().WriteAndGo("Имя не введено");
                 }
 
                 catch (Exception ex)
                 {
-                    _container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сервера или введённый вами сервер недоступен \n" + ex);
+                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сервера или введённый вами сервер недоступен \n" + ex);
                     break;
                 }
             }
         }
 
-        public static void DessirializeData(string data, UnityContainer _container)
+        public static void DessirializeData(string data)
         {
             SQLServerData SQLData = JsonConvert.DeserializeObject<SQLServerData>(data);
-            _container.Resolve<Bootstrapper>().WriteAndGo("date " + SQLData.date + " Server " + SQLData.Server + " Version " + SQLData.Version);
+            unityData.container.Resolve<Bootstrapper>().WriteAndGo("date " + SQLData.date + " Server " + SQLData.Server + " Version " + SQLData.Version);
         }
     }
 }

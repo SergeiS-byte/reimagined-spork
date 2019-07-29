@@ -16,9 +16,9 @@ namespace SiteDLL
     public class SiteCeator : CheckAvailability
     {
 
-        public override IAvailable Check_Object(string Data, UnityContainer container)
+        public override IAvailable Check_Object(string Data)
         {
-            return new Sites(Data, container);
+            return new Sites(Data);
         }
     }
 
@@ -34,22 +34,19 @@ namespace SiteDLL
     {
         private string SiteID;
         private string processingData;
-        UnityContainer _container;
 
         public string SitePingData
         {
             get { return SiteID; }
         }
 
-        public Sites(string data, UnityContainer container)
+        public Sites(string data)
         {
             processingData = data;
 
             Ping ping = new Ping();
             PingReply pingReply = ping.Send(data);
             SiteID = pingReply.Address.ToString();
-
-            _container = container;
         }        
 
         public void CheckAvailability()
@@ -84,7 +81,7 @@ namespace SiteDLL
             {
                 //Недоступно - www.euroset.ru
                 //Доступно - www.yandex.ru
-                _container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта");
+                unityData.container.Resolve<Bootstrapper>().WriteAndGo("Введено неверное имя сайта или введенный сайт недоступен. Введите корректное имя сайта");
             }
             //}
         }

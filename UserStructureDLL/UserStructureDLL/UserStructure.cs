@@ -58,6 +58,7 @@ namespace UserStructureDLL
     {
         private static void Show(int num, UnityContainer container)
         {
+            
             Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             StartupFoldersConfigSection section = (StartupFoldersConfigSection)cfg.Sections["StartupFolders"]; //не может загрузить из конфига
 

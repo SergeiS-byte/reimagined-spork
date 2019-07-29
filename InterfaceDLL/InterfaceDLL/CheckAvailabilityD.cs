@@ -1,14 +1,12 @@
-﻿using Unity;
-
-namespace InterfaceDLL
+﻿namespace InterfaceDLL
 {
     abstract public class CheckAvailability
     {
-        public abstract IAvailable Check_Object(string data, UnityContainer container);
+        public abstract IAvailable Check_Object(string data);
 
-        public void CheckOperation(string data, UnityContainer container)
+        public void CheckOperation(string data)
         {
-            var check = Check_Object(data, container);
+            var check = Check_Object(data);
             check.CheckAvailability();
         }
     }
@@ -20,9 +18,9 @@ namespace InterfaceDLL
 
     public class Summon
     {
-        public void call(CheckAvailability check, string data, UnityContainer container)
+        public void call(CheckAvailability check, string data)
         {
-            check.CheckOperation(data, container);
+            check.CheckOperation(data);
         }
     }
 }
