@@ -56,7 +56,8 @@ namespace UserStructureDLL
 
     public class SetSettings
     {
-        private static void Show(int num, UnityContainer container)
+
+        public static void Show(int num, UnityContainer container)
         {
             
             Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

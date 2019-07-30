@@ -9,7 +9,7 @@ namespace RemoveWriteLines
 {
     public class unityData
     {
-        public static UnityContainer container;
+        public UnityContainer container;
 
         public void SetContainer()
         {

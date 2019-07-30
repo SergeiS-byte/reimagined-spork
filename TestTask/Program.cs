@@ -26,9 +26,9 @@ namespace TestTask
 
                 if (args.Length == 0)
                 {
-                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Приложение было запущено без параметра");
+                    Udata.container.Resolve<Bootstrapper>().WriteAndGo("Приложение было запущено без параметра");
 
-                    SetSettings.Settings(unityData.container);//UserStructure - убрать
+                    SetSettings.Settings(Udata.container);//UserStructure - убрать
                     //Console.WriteLine("Параметры файла конфигурации");
                     List<string> SendingData = new List<string>();
 
@@ -40,37 +40,37 @@ namespace TestTask
                     //ConfigSettings.ReadAllSettings();
                     //Console.WriteLine();
 
-                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Вы хотите изменить параметры запуска?\nВведите: да/нет");
-                    string param = Convert.ToString(unityData.container.Resolve<ReplaceConsole>().ReadD());
+                    Udata.container.Resolve<Bootstrapper>().WriteAndGo("Вы хотите изменить параметры запуска?\nВведите: да/нет");
+                    string param = Convert.ToString(Udata.container.Resolve<ReplaceConsole>().ReadD());
                     if (param == "да")
                     {
                         //ConfigSettings.ChangeSettings();
-                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path);    //Sites.CheckAvailability();
-                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path);   //MsSQL.CheckAvailability();
+                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path, Udata.container);    //Sites.CheckAvailability();
+                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path, Udata.container);   //MsSQL.CheckAvailability();
 
-                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData);
+                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData, Udata.container);
                     }
                     else if (param == "нет")
                     {
-                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path);    //Sites.CheckAvailability();
-                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path);   //MsSQL.CheckAvailability();
+                        new Summon().call(new SiteCeator(), section.FolderItems[0].Path, Udata.container);    //Sites.CheckAvailability();
+                        new Summon().call(new MSQLCreator(), section.FolderItems[1].Path, Udata.container);   //MsSQL.CheckAvailability();
 
-                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData);
+                        SendigToEmail.SendMessage("SiteFile.json", "FileSQLServer.json", SendingData, Udata.container);
                     }
-                    else unityData.container.Resolve<Bootstrapper>().WriteAndGo("Должно быть введено 1 или 2");
+                    else Udata.container.Resolve<Bootstrapper>().WriteAndGo("Должно быть введено 1 или 2");
                 }
                 else
                 {
-                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Приложение было запущено с параметром");
-                    unityData.container.Resolve<Bootstrapper>().WriteAndGo("Данные последней проверки");
+                    Udata.container.Resolve<Bootstrapper>().WriteAndGo("Приложение было запущено с параметром");
+                    Udata.container.Resolve<Bootstrapper>().WriteAndGo("Данные последней проверки");
 
-                    Sites.DessirializeData(File.ReadAllText("SiteFile.json"));
-                    MsSQL.DessirializeData(File.ReadAllText("FileSQLServer.json"));
+                    Sites.DessirializeData(File.ReadAllText("SiteFile.json"), Udata.container);
+                    MsSQL.DessirializeData(File.ReadAllText("FileSQLServer.json"), Udata.container);
                 }
             }
             catch 
             {
-                unityData.container.Resolve<Bootstrapper>().WriteAndGo("Программа не сработала, попробуйте ее перезапустить");
+                Udata.container.Resolve<Bootstrapper>().WriteAndGo("Программа не сработала, попробуйте ее перезапустить");
             }
         }
     }

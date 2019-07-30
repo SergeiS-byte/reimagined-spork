@@ -13,6 +13,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.6.0-preview7.19362.9" />
     <PackageReference Include="System.Data.SqlClient" Version="4.7.0-preview7.19362.9" />
+    <PackageReference Include="Unity" Version="5.11.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,12 @@
   <ItemGroup>
     <Reference Include="MSQLDLL">
       <HintPath>..\MSQLDLL\MSQLDLL\bin\Debug\MSQLDLL.dll</HintPath>
+    </Reference>
+    <Reference Include="RemoveWriteLines">
+      <HintPath>..\RemoveWriteLines\bin\Debug\RemoveWriteLines.dll</HintPath>
+    </Reference>
+    <Reference Include="SendDLL">
+      <HintPath>..\SendDLL\SendDLL\bin\Debug\SendDLL.dll</HintPath>
     </Reference>
     <Reference Include="SiteDLL">
       <HintPath>..\SiteDLL\SiteDLL\bin\Debug\SiteDLL.dll</HintPath>
